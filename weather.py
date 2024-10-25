@@ -1,5 +1,5 @@
-import requests
-from dotenv import load_dotenv
+import requests 
+from dotenv import load_dotenv 
 import os
 from dataclasses import dataclass
 
@@ -22,7 +22,7 @@ def get_lat_lon(city_name, state_code, country_code, API_key):
     return lat, lon
 
 # Function to get current weather
-def get_current_weather(lat, lon, API_key):
+def get_weather(lat, lon, API_key):
     response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_key}&units=metric').json() # converts to json Object
     data = WeatherData(
         main=response.get('weather')[0].get('main'),
@@ -36,4 +36,4 @@ def get_current_weather(lat, lon, API_key):
 
 if __name__ == "__main__":
     lat, lon = get_lat_lon('Wauchula', 'FL', 'United States', api_key)
-    print(get_current_weather(lat, lon, api_key))
+    print(get_weather(lat, lon, api_key))
